@@ -1,34 +1,21 @@
-import React, { useState } from 'react';
-import { AddCategory, GifGrid } from './components';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { NavBar } from './components/NavBar';
+import { HomePage } from './pages/HomePage';
+import { AboutPage } from './pages/AboutPage';
 
 export const GifExpertApp = () => {
-
-const [categories, setCategories] = useState(['One Punch']);
-
-const onAddCategory = (newCategory) => {
-
-  if (categories.includes(newCategory)) return;  
-
-  setCategories([newCategory, ...categories]);
-}
-
-
-return (
-    <>
-      <h1>GifExpertApp</h1>
-
-        <AddCategory 
-          onNewCategory={onAddCategory}
-        />
-
-        <h2>Categories</h2>
-
-        {
-            categories.map(category => (
-               <GifGrid key={category} category={category} />
-            ))
-        }
- 
-    </>
+  return (
+    <BrowserRouter>
+      <NavBar />
+      
+      <div style={{ padding: '0 20px' }}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="*" element={<h1>404 - Página no encontrada</h1>} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   )
 }
