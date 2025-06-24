@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AddCategory } from '../components/AddCategory';
 import { GifGrid } from '../components/GifGrid';
 
 export const HomePage = () => {
 
 const [categories, setCategories] = useState(['One Punch']);
+const navigate = useNavigate();
 
 const onAddCategory = (newCategory) => {
 
   if (categories.includes(newCategory)) return;  
 
   setCategories([newCategory, ...categories]);
+  
+  // Navegar automáticamente a la nueva categoría
+  navigate(`/category/${newCategory}`);
 }
 
 return (
