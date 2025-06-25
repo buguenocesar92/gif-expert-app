@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom'
+import { useFavorites } from '../context/FavoritesContext'
 
 export const NavBar = () => {
+  
+  const { favoritesCount } = useFavorites();
+  
   return (
     <nav style={{
       display: 'flex',
@@ -21,6 +25,35 @@ export const NavBar = () => {
         }}
       >
         🏠 Inicio
+      </Link>
+      
+      <Link 
+        to="/favorites" 
+        style={{
+          textDecoration: 'none',
+          padding: '10px 15px',
+          backgroundColor: '#dc3545',
+          color: 'white',
+          borderRadius: '5px',
+          position: 'relative'
+        }}
+      >
+        ❤️ Favoritos
+        {favoritesCount > 0 && (
+          <span style={{
+            position: 'absolute',
+            top: '-8px',
+            right: '-8px',
+            backgroundColor: '#ffc107',
+            color: '#000',
+            borderRadius: '50%',
+            padding: '2px 6px',
+            fontSize: '12px',
+            fontWeight: 'bold'
+          }}>
+            {favoritesCount}
+          </span>
+        )}
       </Link>
       
       <Link 
